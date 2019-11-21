@@ -10,7 +10,11 @@
             <h1>Movies</h1>
             @foreach (Movie m in Model.Movies)
             {
-                <div class="movie-entry">
+                <div class="movie-entry" 
+                     data-title="@m.Title" 
+                     data-mpaa="@m.MPAA_Rating" 
+                     data-imdb="@m.IMDB_Rating"
+                     data-year="@m.Release_Year">
                     @if (m.Release_Year != null)
                     {
                         <h2>@m.Title (@m.Release_Year)</h2>
@@ -49,8 +53,8 @@
             }
         </div>
 
-        <form method="post">
-            <input type="text" name="search" value="@Model.search" />
+        <form method="post" id="search-and-filter-form">
+            <input type="text" name="search" id="search" value="@Model.search" />
 
             <label>
                 <input type="checkbox" value="G" name="mpaa" checked="@Model.mpaa.Contains("G")" />
@@ -75,7 +79,7 @@
 
             <label>
                 Minimum IMDB Rating:
-                <input type="number" min="0" max="10" step=".1" name="minIMDB" value="@Model.minIMDB" />
+                <input type="number" min="0" max="10" step=".1" name="minIMDB" id="minIMDB" value="@Model.minIMDB" />
             </label>
 
             <input type="submit" value="Search" />
